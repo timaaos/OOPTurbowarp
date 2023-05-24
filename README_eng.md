@@ -2,7 +2,7 @@
 Русский README [здесь!](https://github.com/timaaos/OOPTurbowarp/blob/master/README.md)
 This extension adds classes, methods and objects to Turbowarp.
 ## Examples of using
-1. Cat class
+1. Cat class  
 ![image](https://github.com/timaaos/OOPTurbowarp/assets/75538611/ffe5daf0-a0da-426b-ad5a-9f0dd4855a04)
 ## How to install:
 1. Copy the code:
