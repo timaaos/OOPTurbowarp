@@ -208,7 +208,8 @@
       if(Scratch.oop == undefined){
         Scratch.oop = {
           classes:{},
-          calldata:{}
+          calldata:{},
+          initdata:{}
         }
       }
     }
@@ -239,12 +240,13 @@
       }
       return Object.keys(Scratch.oop.classes);
     }
-    class({NAME}) {
+    class(args, util) {
       this.tryinit();
-      if(!Object.keys(Scratch.oop.classes).includes(NAME)){
-        Scratch.oop.classes[NAME] = {};
+      if(!Object.keys(Scratch.oop.classes).includes(args.NAME)){
+        Scratch.oop.classes[args.NAME] = {util: util, initprops: {}};
+        Scratch.oop.initdata.class = args.NAME;
       }
-      return ((Scratch.oop.calldata.type == 'init' && Scratch.oop.calldata.class == NAME) || (Scratch.oop.calldata.type == 'func' && Scratch.oop.calldata.class == NAME));
+      return ((Scratch.oop.calldata.type == 'init' && Scratch.oop.calldata.class == args.NAME) || (Scratch.oop.calldata.type == 'func' && Scratch.oop.calldata.class == args.NAME));
     }
     this_property(args, util) {
       this.tryinit();
@@ -288,7 +290,8 @@
       return false;
     }
     class_prop({NAME, VALUE}) {
-      Scratch.oop.calldata.result[NAME] = VALUE;
+      Scratch.oop.classes[Scratch.oop.initdata.class].initprops[NAME] = VALUE;
+      //Scratch.oop.calldata.result[NAME] = VALUE;
       return true;
     }
     property_obj(args, util) {
@@ -316,16 +319,19 @@
           }, timer);
       });
     };
-    async class_init({NAME}) {
+    class_init(args, util) {
       this.tryinit();
-      var cl = Scratch.oop.classes[NAME];
+      console.log(util);
+      var cl = Scratch.oop.classes[args.NAME];
       if(cl != undefined){
-        Scratch.oop.calldata = {type: "init", class: NAME, ready:false, result:{__class: NAME}};
+        /*Scratch.oop.calldata = {type: "init", class: args.NAME, ready:false, result:{__class: args.NAME}};
         while(!Scratch.oop.calldata.ready){
           await this.__delay__(50);
         }
         var r = Scratch.oop.calldata.result;
-        Scratch.oop.calldata = {};
+        Scratch.oop.calldata = {};*/
+        var r = Scratch.oop.classes[args.NAME].initprops;
+        r.__class = args.NAME;
         return JSON.stringify(r);
       }
       return "undefined";
