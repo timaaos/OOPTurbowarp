@@ -1,6 +1,7 @@
 # ООП Turbowarp
 English README [there!](https://github.com/timaaos/OOPTurbowarp/blob/master/README_eng.md)  
 Это расширение добавляет классы, методы и объекты в Turbowarp.  
+Расширение ещё не полностью позволяет использовать ООП, например нет дочерних классов, но оно уже очень полезное, например сделать несколько персонажей со своими статистиками: здоровье, урон, номер костюма.
 ## Примеры использования
 1. Класс Cat  
 ![image](https://github.com/timaaos/OOPTurbowarp/assets/75538611/ffe5daf0-a0da-426b-ad5a-9f0dd4855a04)
